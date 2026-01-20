@@ -1,3 +1,4 @@
+using MiApi.Repositories;
 using MiApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,14 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient<IPostRepository, PostRepository>();
+builder.Services.AddScoped<IPostService, PostService>();
+builder.Services.AddHttpClient<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserService, UserService>();
 
-// Configurar HttpClient para JSONPlaceholder
-builder.Services.AddHttpClient<IJsonPlaceholderService, JsonPlaceholderService>(client =>
-{
-    client.BaseAddress = new Uri("https://jsonplaceholder.typicode.com/");
-    client.Timeout = TimeSpan.FromSeconds(30);
-    client.DefaultRequestHeaders.Add("Accept", "application/json");
-});
+
 
 // Configurar CORS si es necesario
 builder.Services.AddCors(options =>
