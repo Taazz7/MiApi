@@ -21,5 +21,9 @@ namespace MiApi.Services
         {
             return _repo.GetUserByIdAsync(id);
         }
+        public Task<User> CreateUserAsync(User user) => _repo.CreateUserAsync(user);
+        public Task<bool> UpdateUserAsync(int id, User user) => _repo.UpdateUserAsync(id, user);
+        public Task<bool> DeleteUserAsync(int id) => _repo.DeleteUserAsync(id);
+
     }
 }
